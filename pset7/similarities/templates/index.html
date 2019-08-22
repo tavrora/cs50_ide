@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <div class="col">
+        <form action="/compare" enctype="multipart/form-data" method="post">
+
+            <!-- TODO -->
+            <fieldset>
+                <legend>Выбор файлов</legend>
+                <p><label for="file1">Первый файл</label></p>
+                <p><input type="file" name="file1"></p>
+                <p><label for="file2">Второй файл</label></p>
+                <p><input type="file" name="file2"></p>
+            </fieldset>
+
+            </br>
+
+            <fieldset>
+            <legend>Выбор алгоритма сравнения</legend>
+            <p>
+            <label>По строке <input type="radio" name="algorithm" value="lines"></label></br>
+            <label>По предложению <input type="radio" name="algorithm" value="sentences"></label></br>
+
+            <label>
+                По подстроке
+                <input type="radio" name="algorithm" value="substrings">
+                </br>
+                <input min="1" type="number" name="length" placeholder=" размер подстроки">
+            </label>
+
+            <!--не работает-->
+            <script>
+                $(function() {
+
+                    $('input[name=length]').focus(function() {
+                        $('input[name=algorithm][value=substrings]').prop('checked', true);
+                    });
+
+                });
+            </script>
+
+            </p>
+
+            <button type="submit">Сравнить</button>
+
+        </form>
+    </div>
+
+{% endblock %}

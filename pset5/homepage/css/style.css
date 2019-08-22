@@ -1,0 +1,45 @@
+body {
+	background-color:#C3C3C3;
+	background-image:url(../images/pattern.png);
+	/* background-repeat:repeat-x no-repeat */
+	margin:0;
+	padding:0;
+}
+
+#main {
+	width:800px;
+	height:991px;
+	margin:29px auto;
+	outline:0px solid #FAA21A; /*контур для удобства вёрстки*/
+	background-image:url(../images/bg_s.jpg);
+	background-color:#FEFECC; /* это запасной фон */
+	background-repeat:repeat-x;
+}
+
+#main h1 {
+	text-align:center;
+	outline:0px solid #cc0000;
+	padding-top:182px;
+	padding-bottom:300px;
+	color:#808080;
+	font: 36px Verdana;
+	background-image:url(../images/logo.png);
+	background-repeat:no-repeat;
+	background-position:180px 185px;
+}
+
+#main p {
+	text-align:center;
+	outline:0px solid #cc0000;
+	color:#808080;
+	font:36px Verdana;
+}
+
+#wrapper {
+	outline:0px solid #cc0000;
+	background-image:url(../images/tel.jpg);
+	background-repeat:no-repeat;
+	background-position:0 80px;
+	background-attachment: fixed;
+	/* background:url(../images/tel.jpg) no-repeat 0 80px fixed; - сокращенная запись */
+}

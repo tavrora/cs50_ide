@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <!-- http://getbootstrap.com/docs/4.1/components/alerts/ -->
+    <h4 class="alert-heading">Советники</h4>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Имя</th>
+                <th scope="col">Фамилия</th>
+                <th scope="col">Email</th>
+                <th scope="col">Пароль</th>
+                <th scope="col">Совет</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for respondent in respondents %}
+            <tr>
+                <td>{{ respondent[0] }}</td>
+                <td>{{ respondent[1] }}</td>
+                <td>{{ respondent[2] }}</td>
+                <td>{{ respondent[3] }}</td>
+                <td>{{ respondent[4] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

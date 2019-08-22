@@ -1,0 +1,75 @@
+/* @import url("ps.css") - подключает еще одну таблицу стилей */
+
+body {
+	background-color: #C49B66;
+	font: 14px Verdana;
+	color: #8E642E;
+}
+
+#wrapper {
+	width: 650px;
+	margin: 30px auto;
+	background-color: #FFFD91;
+}
+
+#header {
+	height: 96px;
+	margin-top: 50px;
+	background-image: url(../images/header.png);
+	background-repeat: no-repeat;
+	position: relative;
+}
+
+#content {
+	padding: 20px 30px;
+}
+
+#new {
+	position: absolute;
+	top: 50px;
+	left: 0;
+	border: 2px solid #6C492D;
+}
+
+#icon {
+	position: absolute; /* возможно позиционирование относительно блока-обертки */
+	left: 75px;
+	top: -25px;
+	border: 2px solid #FFFD91;
+	z-index: 1;
+}
+
+#minion {
+	position: absolute;
+	left: 150px;
+	top: -25px;
+	z-index: 2;
+}
+
+#nature {
+	position: fixed; /* позиционирование относительно окна браузера */
+	width: 47px;
+	height: 241px;
+	border: 2px solid #FFFD91;
+	top: 230px;
+	left: 0;
+}
+
+#nature img {
+	border: none;
+}
+
+#test {
+	display: none;
+	/* visibility: hidden (или visible); - скрывает параграф, но его место никто не может занимать */
+}
+
+#href {
+	text-align: center;
+	font-weight: bold;
+	font: 16px Verdana;
+}
+
+a {
+	padding-right: 10px;
+}

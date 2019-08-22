@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DDT HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="css/form.css" type="text/css" rel="stylesheet">
+        <title>Опрос</title>
+    </head>
+    <body>
+
+        <div id="wrapper">
+            <form action="formdata.php" method="POST" name="form1">
+                <fieldset>
+                <legend>Ввод личных данных</legend>
+                <p class="question"><label for="name">Введите Ваше имя (максимум 10 символов)</label></p>
+                <p><input class="input" type="text" name="name" id="name" size="30"maxlength="10"></p>
+                <p class="question"><label for="password">Введите Ваш пароль (максимум 10 символов)</label></p>
+                <p><input class="input" type="password" name="password" id="password" size="30"maxlength="10"></p>
+                </fieldset>
+
+                <fieldset>
+                <legend>Вопросы</legend>
+                <p class="question">Испытываете ли Вы восторг от изучения программирования?</p>
+                <p>
+                <label>Да<input type="radio" name="vostorg" value="yes"></label></br>
+                <label>Нет<input type="radio" name="vostorg" value="no"></label></br>
+                <label>Нажатая кнопка<input type="radio" name="vostorg" value="yy" checked></label>
+                </p>
+
+                <p class="question">Что Вы изучаете?</p>
+                <p>
+                <label><input type="checkbox" name="html">HTML</label></br>
+                <label><input type="checkbox" name="css">CSS</label></br>
+                <label><input type="checkbox" name="sql">SQL</label></br>
+                <label><input type="checkbox" name="commandline" disabled>Командная строка</label></br>
+                <label><input type="checkbox" name="python" checked><b><i>Python</i></b></label>
+                </p>
+
+                <p class="question">Сколько вермени в день Вы уделяете обучению?</p>
+                <select name="lerns" size="3" multiple>
+                <option>2</option>
+                <option>4</option>
+                <option>5</option>
+                <option>8</option>
+                <option>10</option>
+                </select>
+
+                <p class="question"><label for="sleep">Сколько вермени Вы спите?</label></p>
+                <select name="sleep" id="sleep">
+                <option>5</option>
+                <option selected>6</option>
+                <option value="seven">7</option>
+                <option>8</option>
+                <option>12</option>
+                </select>
+
+                </fieldset>
+
+                <p class=" question tp"><label for="text">Поделитесь советами по изучению программирования</label></p>
+                <p><textarea name="text" cols="30" rows="6" id="text">Здесь текст</textarea></p>
+
+                <p id="button"><input type="image" src="images/button.png" value="Отправить кнопкой" name="imageButton"></p>
+
+                <!-- Лишние кнопки
+                <p>
+                <input type="reset" name="reset" value="Сброс">
+                <input type="submit" name="submit" value="Отправить">
+                </p>
+                <p><input type="button" value="Просто кнопка" name="button"</p>
+                -->
+            </form>
+
+            <p id="href">
+                <a href="index.html" title="Любопытно!">Главная</a>
+                <a href="dark_matter.html" title="Мне интересно!">Темная материя</a>
+                <a href="dark_energy.html">Темная энергия</a>
+                <a href="float.html" title="Любопытно!">Интенференция волн</a>
+            </p>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+
+    <div class="form-alert">
+        <form action="/register" method="post" id="regform">
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" id="username" name="username" placeholder="Username" type="text">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="password" name="password" placeholder="Password" type="password">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="confirmation" name="confirmation" placeholder="Confirmation" type="password">
+            </div>
+            <button class="btn btn-primary" type="submit">Register</button>
+        </form>
+        <br>
+    </div>
+
+    <script>
+        //---------Проверка комбинаций символов при вводе пароля------------
+        $("input[type='password']").keyup(function() {
+            var password_1 = $("input[name='password']").val();
+            var password_2 = $("input[name='confirmation']").val();
+            if (password_1 != password_2 && password_1 != "" && password_2 != "") {
+                if (!$("div").is(".password_2 div:nth-child(3)")) {
+                    $(".password_2")
+                        .append('<div>Пароли не совпадают</div>');
+                }
+                else {
+                    var text = $(".password_2 div:nth-child(3)").text();
+                    if (text == "") {
+                        $(".password_2 div:nth-child(3)")
+                            .text('Пароли не совпадают');
+                    }
+                }
+                $("input[name='confirmation']")
+                    .css("background", "#ffcab2");
+            }
+            else {
+                $(".password_2 div:nth-child(3)")
+                    .empty();
+                $("input[name='confirmation']")
+                    .css("background", "#fdfadc");
+            }
+        });
+    </script>
+
+    <!--добавила проверку инени на бэке-->
+
+    <script>
+    // привязываем обработчик к форме #regform
+
+        // отслеживаем состояние
+        var control = false;
+
+        $(document).ready(function(){
+            // запрещаем отправку формы до проверки
+            $('#regform').submit(function(event) {
+                if (control == false) {
+                    event.preventDefault();
+
+                    // идем по маршруту check, передавая имя из формы
+                    $.get('/check', {username: $('#username').val()}, function(data) {
+                        console.log(data);
+
+                        // если check возвращает ложь, значит такое имя уже есть в БД
+                        if(data == false) {
+
+                            event.preventDefault();
+                            console.log("запрет отправки");
+                            // alert("Name not available.");
+                            // bootstrap-уведомление
+                            $('.form-alert').append('<div class="alert alert-danger" role="alert"> Name not available. </div>');
+                            return false;
+                        }
+
+                        // иначе, имя доступно, программно вызываем отправку формы
+                        else {
+                            console.log("имя свободно");
+                            control = true;
+                            // переменная для приветствия от Жени
+                            localStorage.setItem('hello', 'y');
+
+                            $('#regform').submit();  // зацикливает check?
+                            return true;
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

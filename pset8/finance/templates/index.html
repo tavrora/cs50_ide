@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+
+    <div class="form-alert"></div>
+
+    <!--отслеживаем состояние-->
+    <script>
+        console.log('hi');
+    </script>
+
+    <script>
+        if (localStorage.getItem('hello') === 'y') {
+            console.log('aloha!');
+            $('.form-alert').append('<div class="alert alert-info" role="alert"> Registered! </div>');
+            localStorage.setItem('hello', 'n');
+        }
+    </script>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Name</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Price</th>
+                <th scope="col">TOTAL</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td><b>{{ totalSum }}</b></td>
+            </tr>
+        </tfoot>
+        <tbody>
+
+            {% for info in infoView %}
+            <tr>
+                <td>{{ info['symbol'] }}</td>
+                <td>{{ info['name'] }}</td>
+                <td>{{ info['shares'] }}</td>
+                <td>{{ info['price'] }}</td>
+                <td>{{ info['total'] }}</td>
+            </tr>
+            {% endfor %}
+
+            <tr>
+                <th scope="row">CASH</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ userCashFormat }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

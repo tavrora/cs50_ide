@@ -1,0 +1,190 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <!-- http://getbootstrap.com/docs/4.1/content/typography/ -->
+    <h1 class="mb-3">Анкета</h1>
+
+    <!-- http://getbootstrap.com/docs/4.1/components/forms/ -->
+    <form action="/form" method="post" name="contact_form" onsubmit="return validate_form ( );">
+
+        <!-- TODO -->
+        <fieldset>
+            <legend>Ввод личных данных</legend>
+
+            <label>Имя и фамилия</label>
+            <div class="row">
+                <div class="col">
+                    <input name="firstname" type="text" class="form-control" placeholder="Введите имя">
+                </div>
+                <div class="col">
+                    <input name="lastname" type="text" class="form-control" placeholder="Введите фамилию">
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Введите еmail">
+                <small id="emailHelp" class="form-text text-muted">Мы не покажем Ваш адрес кому-то ещё.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Пароль</label>
+                <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Это всё шутка. Не вводите настоящий пароль.">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Вопросы</legend>
+            <p class="question">Испытываете ли Вы восторг от изучения программирования?*</p>
+            <p>
+                <label>Да <input type="radio" name="vostorg" value="yes"></label>
+                <br />
+                <label>Нет <input type="radio" name="vostorg" value="no"></label>
+                <br />
+                <label>Испытываю смешанные чувства <input type="radio" name="vostorg" value="yy" checked></label>
+            </p>
+
+            <p class="question">Что Вы изучаете?</p>
+            <p>
+                <label><input type="checkbox" name="html"> HTML</label>
+                <br />
+                <label><input type="checkbox" name="css"> CSS</label>
+                <br />
+                <label><input type="checkbox" name="sql"> SQL</label>
+                <br />
+                <label><input type="checkbox" name="commandline" disabled> Сommand line</label>
+                <br />
+                <label><input type="checkbox" name="python" checked><b><i> Python</i></b></label>
+            </p>
+
+            <p class="question">Сколько вермени в день Вы уделяете обучению?</p>
+            <select name="lerns" size="3" multiple>
+                <option>2</option>
+                <option>4</option>
+                <option>5</option>
+                <option>8</option>
+                <option>10</option>
+            </select>
+            <br />
+            <br />
+
+            <p class="question"><label for="sleep">Сколько вермени Вы спите?</label></p>
+            <select name="sleep" id="sleep">
+                <option>5</option>
+                <option selected>6</option>
+                <option value="seven">7</option>
+                <option>8</option>
+                <option>12</option>
+            </select>
+
+        </fieldset>
+
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Какой из законов Ньютона Ваш любимый?</legend>
+                <div class="col-sm-10">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                    <label class="form-check-label" for="gridRadios1">
+                        Первый
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                    <label class="form-check-label" for="gridRadios2">
+                        Второй
+                    </label>
+                </div>
+                <div class="form-check disabled">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+                    <label class="form-check-label" for="gridRadios3">
+                        А сколько их?
+                    </label>
+                </div>
+              </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row">
+                <div class="col-sm-2">Здесь можно отметиться</div>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                        <label class="form-check-label" for="gridCheck1">
+                            Для галочки
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row align-items-center">
+                <div class="col-auto my-1">
+                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                        <option selected>Здесь тоже можно...</option>
+                        <option value="1">Учиться</option>
+                        <option value="2">Гулять</option>
+                        <option value="3">Спать</option>
+                    </select>
+                </div>
+                <div class="col-auto my-1">
+                    <div class="custom-control custom-checkbox mr-sm-2">
+                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                        <label class="custom-control-label" for="customControlAutosizing">Запомнить мой выбор!</label>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+
+        <br />
+        <p class=" question tp"><label for="text">Поделитесь советами по изучению программирования</label></p>
+        <p><textarea name="text" cols="30" rows="6" id="text" placeholder="Я поняла почему среди женщин нет великих физиков. Вчера присела почитать Квантовую вероятность, так у меня котлеты сгорели."></textarea></p>
+
+        <input class="form-control" type="text" placeholder="Спасибо за уделённое время! Успехов в изучении нового!" readonly>
+        <br />
+
+        <!-- http://getbootstrap.com/docs/4.1/components/buttons/ -->
+        <button class="btn btn-primary" type="submit">Отправить</button>
+
+    </form>
+
+    <script>
+        // источник https://ruseller.com/lessons.php?id=592&rub=28
+
+        function validate_form()
+        {
+        	valid = true;
+            // 	проверка имени на фронте и на бэке
+            if (document.contact_form.firstname.value == "")
+            {
+                alert ("Пожалуйста, введите Ваше имя.");
+                valid = false;
+            }
+
+            if (document.contact_form.lastname.value == "")
+            {
+                alert ("Пожалуйста, введите Вашу фамилию.");
+                valid = false;
+            }
+
+            if (document.contact_form.exampleInputEmail1.value == "")
+            {
+                alert ("Пожалуйста, введите Ваш email.");
+                valid = false;
+            }
+
+            // для радиокнопок только фронтовая проверка
+            if ((document.contact_form.vostorg[0].checked == false ) && ( document.contact_form.vostorg[1].checked == false ) && ( document.contact_form.vostorg[2].checked == false))
+            {
+                alert ("Пожалуйста, укажите тип восторга.");
+                valid = false;
+            }
+
+            return valid;
+        }
+
+    </script>
+
+{% endblock %}

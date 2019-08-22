@@ -1,0 +1,81 @@
+body {
+	font: 13px Verdana, sans-serif;
+	color: #333333;
+	background-image:url(../images/102.png);
+}
+
+legend {
+	font-weight: bold;
+}
+
+#wrapper {
+	width: 500px;
+	margin-left: auto;
+    margin-right: auto;
+	padding-top: 20px;
+
+}
+
+#button {
+	text-align: center;
+}
+
+.question {
+	font-weight: bold;
+}
+
+.tp {
+	margin-left: 10px;
+}
+
+fieldset {
+	padding: 10px;
+	margin: 10px;
+	border: 1px solid #cccccc;
+	background-color: #FCFCFC;
+}
+
+textarea {
+	border: 1px solid #333333;
+	background-color: #F4F9FF;
+	width: 465px;
+	margin: 2px 10px;
+	font: 13px Verdana, sans-serif;
+	padding: 0 7px;
+}
+
+textarea:focus {
+	border: 2px solid #7AA5DA;
+	background-color: #FFFFFF;
+}
+
+label {
+	cursor: pointer;
+}
+
+.input {
+	border: 1px solid #333333;
+	width: 300px;
+	height: 27px;
+	background-image: url(../images/inputbg.jpg);
+	background-repeat: repeat-x;
+	font: 13px Verdana, sans-serif;
+	line-height: 27px; /* для IE */
+	padding: 0 7px;
+}
+
+.input:focus {
+	border: 2px solid #7AA5DA;
+	background: none;
+	background-color: #FFFFFF;
+}
+
+#href {
+	text-align: center;
+	font-weight: bold;
+	font: 13px Verdana;
+}
+
+a {
+	padding-right: 10px;
+}
