@@ -50,8 +50,8 @@ def index():
 
     # узнаём id авторизованного пользователя
     idSess = session['user_id']
-    print("ololo-index")            # ololo-index
-    print(idSess)                   # [{'id': 54}] регистрация, но 54 при авторизации!
+    # print("ololo-index")            # ololo-index
+    # print(idSess)                   # [{'id': 54}] регистрация, но 54 при авторизации!
     # ПОЧЕМУ ПРИ РЕГИСТРАЦИИ И ПРИ АВТОРИЗАЦИИ ID CЕССИИ ПРИХОДИТ В РАЗНОМ ФОРМАТЕ?????????? потому что я так передавала в методе регистарции )))
     # print(idSess[0]['id'])          # 54    # при авторизации такого элемента нет ("у числа нет индекса")
 
@@ -63,7 +63,7 @@ def index():
 
     # ПРОВЕРКА - ЕСТЬ ЛИ ПОКУПКИ У ПОЛЬЗОВАТЕЛЯ - (ИНАЧЕ ОБРАЩЕНИЕ В БД ПО USER_ID, КОТОРОГО ТАМ НЕТ)
     allUserId = db.execute("SELECT DISTINCT user_id FROM portfolio_more")
-    print(allUserId)
+    # print(allUserId)
 
     # ЕСЛИ ТАКОЙ ID УЖЕ ЕСТЬ В БД (Т.Е. ПОЛЬЗОВАТЕЛЬ УЖЕ ВЛАДЕЕТ АКЦИЯМИ - АВТОРИЗАЦИЯ), ОТОБРАЖАЕМ ИНФУ
     for any in allUserId:
@@ -74,7 +74,8 @@ def index():
 
             # делаем выборку всех пакетов акций и вычисляем количество акций в каждом пакете (скаладываем внутри пакета)
             symbShar = db.execute(
-                "SELECT DISTINCT symbol, SUM(shares) FROM portfolio_more GROUP BY symbol HAVING user_id = :user_id", user_id=idSess)
+                # "SELECT DISTINCT symbol, SUM(shares) FROM portfolio_more GROUP BY symbol HAVING user_id = :user_id", user_id=idSess) # первый вариант - СЛОЖЕНИЕ РАБОТАЕТ НЕВЕРНО
+                "SELECT DISTINCT symbol, SUM(shares) FROM portfolio_more GROUP BY symbol, user_id = :user_id HAVING user_id = :user_id", user_id=idSess)
             print(symbShar)
             # [{'symbol': 'abc', 'SUM(shares)': 5}, {'symbol': 'nflx', 'SUM(shares)': 3}]
 
@@ -90,6 +91,7 @@ def index():
             for i in symbShar:
                 # ЕСЛИ КОЛИЧЕСТВО АКЦИЙ НЕ НОЛЬ
                 if (int(i['SUM(shares)']) != 0):
+                    print(i)
                     # заваодим словарь для каждого типа акции
                     infoViewLocal = {}
                     # добаляем символ акции в верхнем регистре
@@ -103,6 +105,7 @@ def index():
                     # добавляем текущую цену акции
                     infoViewLocal.update({'price': quote['price']})
                     # вычисляем и форматируем итоговую цену пакета данных акций
+                    tot = i['SUM(shares)'] * quote['price']
                     total = usd(i['SUM(shares)'] * quote['price'])
                     # добавляем итоговую цену пакета данных акций
                     infoViewLocal.update({'total': total})
@@ -111,16 +114,19 @@ def index():
                     infoView.append(infoViewLocal)
 
                     # все активы = сумма всех акций + свободный кэш (меняется после add cash)
-                    totalSum = usd(int(userCash[0]['cash']) + i['SUM(shares)'] * quote['price'])
+                    # totalSum = usd(int(userCash[0]['cash']) + i['SUM(shares)'] * quote['price'])  # СЧИТАЕТСЯ НЕВЕРНО
+                    totalSum = totalSum + tot
+                    # print(totalSum)
 
                 # print(infoView)
 
-            print(totalSum)
+            totalSum = usd(totalSum + float(userCash[0]['cash']))
 
             return render_template("index.html", infoView=infoView, userCashFormat=userCashFormat, totalSum=totalSum)
 
     # ИНАЧЕ ПРОСТО ОТОБРАЖАЕМ ИНДЕКС c кэшем и контрольной суммой (они совпадают, если нет акций)!
     return render_template("index.html", userCashFormat=userCashFormat, totalSum=userCashFormat)
+
 
 
 @app.route("/buy", methods=["GET", "POST"])
