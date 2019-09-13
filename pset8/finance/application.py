@@ -418,9 +418,12 @@ def sell():
         if i == idSess:
             # print("popopop")
 
-            # делаем выборку всех пакетов акций
-            symbAll = db.execute("SELECT DISTINCT symbol FROM portfolio_more WHERE user_id = :user_id", user_id=idSess)
-            # print(symbAll)
+            # делаем выборку всех пакетов акций (НАДО ВЫБРАТЬ ТЕ, ОБЩЕЕ КОЛ-ВО КОТОРЫХ > 0)
+            # symbAll = db.execute("SELECT DISTINCT symbol FROM portfolio_more WHERE user_id = :user_id", user_id=idSess) # все пакеты с проданными
+            # только те пакеты, которые есть в наличии
+            symbAll = db.execute(
+                "SELECT DISTINCT symbol FROM portfolio_more GROUP BY symbol, user_id = :user_id HAVING user_id = :user_id AND SUM(shares) > 0", user_id=idSess)
+            print(symbAll)
 
             # заносим названия в верхнем регистре в список
             symbAllUpper = []
@@ -449,9 +452,9 @@ def sell():
                         # если есть, проверяем, что количество акций в пакете больше или равно заявленному для продажи
                         # РЕГИСТР НАЗВАНИЯ АКЦИИ В БД (ЗАНОСИТСЯ В ВЕРХНЕМ, ПРОВЕРЯЕТСЯ В ВЕРХНЕМ - для занесенных в нижнем уже не сработает!...)
                         quantitySymb = db.execute(
-                            "SELECT SUM(shares) FROM portfolio_more GROUP BY symbol HAVING user_id = :user_id AND symbol=:symbol", user_id=idSess, symbol=symb)
-                        # print(quantitySymb)
-                        # print(quantitySymb[0]['SUM(shares)'])
+                            "SELECT SUM(shares) FROM portfolio_more WHERE user_id = :user_id GROUP BY symbol HAVING symbol=:symbol", user_id=idSess, symbol=symb)
+                        print(quantitySymb)
+                        print(quantitySymb[0]['SUM(shares)'])
 
                         if quantitySymb[0]['SUM(shares)'] >= int(shar):
                             # совершаем продажу и выходим из цикла
